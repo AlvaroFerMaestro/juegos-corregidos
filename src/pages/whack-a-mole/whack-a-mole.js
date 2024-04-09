@@ -55,13 +55,25 @@ export const initmole = (divApp) => {
         alert("Atrapa a todos los Jacobitos que puedas!");
     });
 
+
     btnStop.addEventListener("click", () => {
         animacionActiva = false;
         btnStop.style.display = "none";
         btnPlay.style.display = "inline-block";
         clearInterval(intervalo);
+    
+        const imgJacobitos = document.querySelectorAll(".imgJacob");
+        imgJacobitos.forEach(imgJacobito => {
+            if (!imgJacobito.classList.contains("atrapado")) {
+                imgJacobito.remove();
+            } else {
+                imgJacobito.removeEventListener("click", arrestarJacobito);
+            }
+        });
+    
+        alert(`¡Has atrapado ${contador} Jacobitos!`);
     });
-
+    
     containdiv.append(score);
     containdiv.append(imgmazo);
     containdiv.append(buttonInicio);
